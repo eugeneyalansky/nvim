@@ -26,18 +26,22 @@ vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+vim.keymap.set('n', '<leader>t', "<cmd>ToggleTerm<cr>")
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+
+vim.keymap.set('n', '[b', ':bp<CR>', { desc = 'Go to previous buffer' })
+vim.keymap.set('n', ']b', ':bn<CR>', { desc = 'Go to next buffer' })
+vim.keymap.set('n', '<leader>bq', ':bd<cr>', { desc = 'Close buffer' })
+
 
 require('config.lazy')
 
 
 -- Highlight yank
 vim.api.nvim_create_autocmd('TextYankPost', {
-  desc = 'Highlight when yanking (copying) text',
-  group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
-  callback = function()
-    vim.highlight.on_yank()
-  end,
+    desc = 'Highlight when yanking (copying) text',
+    group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
+    callback = function()
+        vim.highlight.on_yank()
+    end,
 })
-
-
